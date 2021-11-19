@@ -80,7 +80,7 @@ def webex_teams_webhook_events():
 
         else:
             # Message was sent by someone else; parse message and respond.
-            if "/CAT" in message.text:
+            if "status" in message.text:
                 username = 'devnetuser'
                 password = 'RG!_Yw919_83'
                 vManage = 'sandbox-sdwan-1.cisco.com'
