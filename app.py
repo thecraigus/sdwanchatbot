@@ -11,7 +11,7 @@ CAT_FACTS_URL = 'https://catfact.ninja/fact'
 
 
 
-flask_app = Flask(__name__)
+app = Flask(__name__)
 
 api = WebexTeamsAPI()
 
@@ -29,7 +29,7 @@ def get_catfact():
 
 # Core bot functionality
 # Your Webex Teams webhook should point to http://<serverip>:5000/events
-@flask_app.route('/events', methods=['GET', 'POST'])
+@app.route('/events', methods=['GET', 'POST'])
 def webex_teams_webhook_events():
     """Processes incoming requests to the '/events' URI."""
     if request.method == 'GET':
@@ -79,4 +79,4 @@ def webex_teams_webhook_events():
 
 if __name__ == '__main__':
     # Start the Flask web server
-    flask_app.run(host='0.0.0.0', port=5000)
+    flask_app.run()
