@@ -13,7 +13,7 @@ CAT_FACTS_URL = 'https://catfact.ninja/fact'
 
 app = Flask(__name__)
 
-api = WebexTeamsAPI()
+#api = WebexTeamsAPI()
 
 
 def get_catfact():
