@@ -1,6 +1,5 @@
 from flask import Flask, request
 import requests
-
 from webexteamssdk import WebexTeamsAPI, Webhook
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -28,7 +27,8 @@ def webex_teams_webhook_events():
                        </head>
                    <body>
                    <p>
-                   The App is running! 
+                   <h1>SDWAN Chatbot</h1>
+                   <h2>The App is running!</h2> 
                    </p>
                    </body>
                    </html>
@@ -42,11 +42,6 @@ def webex_teams_webhook_events():
         webhook_data = Webhook(json_data)
         room = api.rooms.get(webhook_data.data.roomId)
         message = api.messages.get(webhook_data.data.id)
-        person = api.people.get(message.personId)
-
-        print("NEW MESSAGE IN ROOM '{}'".format(room.title))
-        print("FROM '{}'".format(person.displayName))
-        print("MESSAGE '{}'\n".format(message.text))
 
 
         bot = api.people.me()
@@ -56,11 +51,11 @@ def webex_teams_webhook_events():
 
         else:
             if "sdwan controller status" in message.text:
-                viptella = requests.session()
-                viptella.post(url=authurl, data=authbody, verify=False)
-                login_token = viptella.get(url=token_url, verify=False)
-                viptella.headers['X-XSRF-TOKEN'] = login_token.content
-                getStatus = viptella.get(
+                viptela = requests.session()
+                viptela.post(url=authurl, data=authbody, verify=False)
+                login_token = viptela.get(url=token_url, verify=False)
+                viptela.headers['X-XSRF-TOKEN'] = login_token.content
+                getStatus = viptela.get(
                     url=f"https://{vManage}:443/dataservice/device/monitor", verify=False).json()
 
                 deviceStatus = []
